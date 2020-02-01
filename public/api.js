@@ -9,7 +9,7 @@ const API = {
     const id = location.search.split("=")[1];
 
     const res = await fetch("/api/workouts/", {
-      method: "PUT",
+      method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(data)
     });
@@ -32,9 +32,7 @@ const API = {
   async getWorkoutsInRange() {
     const res = await fetch(`/api/workouts/range`);
     const json = await res.json();
-
+    
     return json;
   },
 };
-
-

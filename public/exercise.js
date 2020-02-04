@@ -29,6 +29,7 @@ async function initExercise() {
   } else {
     alert("initExercise found id",workout._id);
     location.search = "?id=" + workout._id;
+    alert("locationsearh",location.search);
   }
 
   // if (workout) {

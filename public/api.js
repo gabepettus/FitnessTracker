@@ -19,7 +19,7 @@ const API = {
     console.log("^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^");
     // need to add in id 
     const res = await fetch("/api/workouts/", {
-      method: "PUT",
+      method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(data)
     });

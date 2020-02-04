@@ -9,11 +9,7 @@ router.post("/api/workouts", (req,res) => {
   // console.log("res",res);
   db.Workout.create({})
   .then(dbWorkout => {
-    console.log("new workout dbWorkout", dbWorkout);
-    console.log("dbWorkout._id", dbWorkout._id);
-
     res.json(dbWorkout);
-
     return db.Workout.findOneAndUpdate(
       {_id: dbWorkout._id}, 
       {$push: {exercises: req.body}}
@@ -24,7 +20,21 @@ router.post("/api/workouts", (req,res) => {
   });
 });
 
-router.post("/api/workouts/:id", function(req, res) {
+router.put("/api/workouts/:id", (req,res) => {
+  console.log("XXXX put api/workouts XXXX");
+  console.log("id",req.params.id);
+  console.log("req.body",req.body);
+  console.log("XXXX^^^^^^^XXXX");
+
+  // console.log("res",res);
+    return db.Workout.findOneAndUpdate(
+      {_id: req.params.id}, 
+      {$push: {exercises: req.body}}
+    )
+});
+
+// router.put("/api/workouts/:id", function(req, res) {
+router.put("/api/turd/:id", function(req, res) {
   // const specified_id = req.params.id;
 
   console.log("XXXX post api/workouts/:id XXXX");
@@ -32,30 +42,34 @@ router.post("/api/workouts/:id", function(req, res) {
   console.log("req.body",req.body);
   console.log("XXXX^^^^^^^XXXX");
 
-  console.log("update id",req.params.id);
-  db.Workout.findByIdAndUpdate({id: req.params.id})
-  .then(dbWorkout => {
-    console.log("update workout dbWorkout", dbWorkout);
-    console.log("dbWorkout._id", dbWorkout._id);
-
-    res.json(dbWorkout);
-
-    return db.Workout.findOneAndUpdate(
-      {_id: dbWorkout._id}, 
-      {$push: {exercises: req.body}}
-    );
-  })
+  db.Workout.findByIdAndUpdate(
+    req.params.id,
+    {$push:{exercises:req.body}},
+    (err, workoutUpdate) => {
+      if (err) {
+        res.json({
+          success: false,
+          msg: "failure" 
+        });
+      } else {
+        res.json({workoutUpdate, success: true, msg: "success"});
+      }
+    }
+  )
   .catch (err => {
     res.json(err);
   });
+  // .then(dbWorkout => {
+    // console.log("update workout dbWorkout", dbWorkout);
+    // console.log("dbWorkout._id", dbWorkout._id);
 
-  for (var i = 0; i < characters.length; i++) {
-    if (chosen === characters[i].routeName) {
-      return res.json(characters[i]);
-    }
-  }
+    // res.json(dbWorkout);
 
-  return res.json(false);
+    // return db.Workout.findOneAndUpdate(
+      // {id: dbWorkout._id}, 
+      // {$push: {exercises: req.body}}
+    // );
+  // })
 });
 
 router.get("/api/workouts", (req, res) => {

@@ -1,6 +1,12 @@
 const API = {
   async getLastWorkout() {
-    const res = await fetch("/api/workouts");
+    let res;
+    try {
+      res = await fetch("/api/workouts");
+    } catch (err) {
+      console.log(err);
+    }
+
     const json = await res.json();
 
     return json[json.length - 1];
@@ -8,8 +14,12 @@ const API = {
   async addExercise(data) {
     const id = location.search.split("=")[1];
 
+    console.log("vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv");
+    console.log("in add", data);
+    console.log("^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^");
+    // need to add in id 
     const res = await fetch("/api/workouts/", {
-      method: "POST",
+      method: "PUT",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(data)
     });
@@ -18,8 +28,11 @@ const API = {
 
     return json;
   },
-  async createWorkout() {
-    const res = await fetch("/api/workouts", {
+  async createWorkout( data ={}) {
+
+    console.log("in create workout");
+
+    const res = await fetch("/api/workouts/", {
       method: "POST",
       headers: { "Content-Type": "application/json" }
     });
@@ -30,6 +43,7 @@ const API = {
   },
 
   async getWorkoutsInRange() {
+    console.log("in getWorkoutInRange");
     const res = await fetch(`/api/workouts/range`);
     const json = await res.json();
     

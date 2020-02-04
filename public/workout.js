@@ -1,6 +1,7 @@
 async function init() {
   const lastWorkout = await API.getLastWorkout();
-  // console.log("Last workout:", lastWorkout);
+  console.log("in init in workout.js");
+  console.log("Last workout:", lastWorkout);
 
     document
       .querySelector("a[href='/exercise?']")

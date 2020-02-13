@@ -20,19 +20,13 @@ let shouldNavigateAway = false;
 async function initExercise() {
   let workout;
 
-  console.log(location.search);
-
   if (location.search.split("=")[1] === undefined) {
     workout = await API.createWorkout()
-    console.log("in initExercise workout",workout)
-    alert("initExercise no found id");
-  } else {
-    alert("initExercise found id",workout._id);
-    location.search = "?id=" + workout._id;
-    alert("locationsearh",location.search);
+    console.log(workout)
   }
-
-  // if (workout) {
+  if (workout) {
+    location.search = "?id=" + workout._id;
+  }
 
 }
 
@@ -156,6 +150,7 @@ if (addButton) {
   addButton.addEventListener("click", handleFormSubmit);
 }
 toast.addEventListener("animationend", handleToastAnimationEnd);
+
 
 document
   .querySelectorAll("input")

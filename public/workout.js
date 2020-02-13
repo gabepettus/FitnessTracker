@@ -1,4 +1,4 @@
-async function init() {
+async function initWorkout() {
   const lastWorkout = await API.getLastWorkout();
   console.log("in init in workout.js");
   console.log("Last workout:", lastWorkout);
@@ -69,4 +69,14 @@ function renderWorkoutSummary(summary) {
   });
 }
 
-init();
+function renderNoWorkoutText() {
+  const container = document.querySelector(".workout-stats");
+  const p = document.createElement("p");
+  const strong = document.createElement("strong");
+  strong.textContent = "You have not created a workout yet!"
+
+  p.appendChild(strong);
+  container.appendChild(p);
+}
+
+initWorkout();

@@ -18,8 +18,8 @@ const API = {
     console.log("in add", data);
     console.log("^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^");
     // need to add in id 
-    const res = await fetch("/api/workouts/", {
-      method: "POST",
+    const res = await fetch("/api/workouts/" + id, {
+      method: "PUT",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(data)
     });
@@ -28,12 +28,13 @@ const API = {
 
     return json;
   },
-  async createWorkout( data ={}) {
+  async createWorkout( data = {}) {
 
     console.log("in create workout");
 
-    const res = await fetch("/api/workouts/", {
+    const res = await fetch("/api/workouts", {
       method: "POST",
+      body: JSON.stringify(data),
       headers: { "Content-Type": "application/json" }
     });
 

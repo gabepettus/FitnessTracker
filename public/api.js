@@ -11,12 +11,14 @@ const API = {
 
     return json[json.length - 1];
   },
+
   async addExercise(data) {
     const id = location.search.split("=")[1];
 
-    console.log("vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv");
-    console.log("in add", data);
-    console.log("^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^");
+    // console.log("vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv");
+    // console.log("in add", data);
+    // console.log("^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^");
+
     // need to add in id 
     const res = await fetch("/api/workouts/" + id, {
       method: "PUT",
@@ -44,7 +46,7 @@ const API = {
   },
 
   async getWorkoutsInRange() {
-    console.log("in getWorkoutInRange");
+    // console.log("in getWorkoutInRange");
     const res = await fetch(`/api/workouts/range`);
     const json = await res.json();
     
